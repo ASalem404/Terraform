@@ -19,6 +19,12 @@ resource "aws_subnet" "asa_public_subnet" {
     Name = "asa_public_subnet"
     Stage = "dev"
     }
+}
 
-
+resource "aws_internet_gateway" "asa_internet_gateway" {
+  vpc_id = aws_vpc.asa_vpc.id
+    tags = {
+    Name = "asa_internet_gateway"
+    Stage = "dev"
+    }
 }
