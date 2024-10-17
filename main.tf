@@ -11,7 +11,7 @@ resource "aws_vpc" "asa_vpc" {
 
 resource "aws_subnet" "asa_public_subnet" {
   vpc_id = aws_vpc.asa_vpc.id
-  cidr_block = "10.123.1.0/16"
+  cidr_block = "10.123.1.0/24"
     availability_zone = "us-east-1a"
     map_public_ip_on_launch = true
 
