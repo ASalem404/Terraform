@@ -87,6 +87,7 @@ resource "aws_instance" "dev_node" {
   key_name = aws_key_pair.asa_auth.key_name
   security_groups = [aws_security_group.asa_sg.name]
   subnet_id = aws_subnet.asa_public_subnet.id
+  user_data = file("userdata.sh")
 
   root_block_device {
     volume_size = 8
