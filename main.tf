@@ -74,3 +74,8 @@ ingress {
         Stage = "dev"
     }
 }
+
+resource "aws_key_pair" "asa_auth" {
+  key_name   = "asakey"
+  public_key = file("~/.ssh/asakey.pub")
+}
