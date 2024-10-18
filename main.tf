@@ -48,3 +48,29 @@ resource "aws_route_table_association" "asa_public_subnet_association" {
   subnet_id = aws_subnet.asa_public_subnet.id
   route_table_id = aws_route_table.asa_public_rt.id
 }
+
+
+resource "aws_security_group" "asa_sg" {
+    vpc_id = aws_vpc.asa_vpc.id
+    name = "asa_sg"
+    description = "Allow inbound traffic on port 22"
+
+ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+      tags = {
+        Name = "asa_sg"
+        Stage = "dev"
+    }
+}
