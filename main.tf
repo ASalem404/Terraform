@@ -79,3 +79,21 @@ resource "aws_key_pair" "asa_auth" {
   key_name   = "asakey"
   public_key = file("~/.ssh/asakey.pub")
 }
+
+
+resource "aws_instance" "dev_node" {
+  ami = data.aws_ami.server_ami.id
+  instance_type = "t2.micro"
+  key_name = aws_key_pair.asa_auth.key_name
+  security_groups = [aws_security_group.asa_sg.name]
+  subnet_id = aws_subnet.asa_public_subnet.id
+
+  root_block_device {
+    volume_size = 8
+  }
+  tags = {
+    Name = "dev_node"
+    Stage = "dev"
+  }
+
+}
