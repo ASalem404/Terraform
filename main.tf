@@ -94,7 +94,7 @@ resource "aws_instance" "dev_node" {
   }
 
   provisioner "local-exec" {
-    command = templatefile("windows-ssh-config.sh", {
+    command = templatefile("${var.host_os}-ssh-config.sh", {
       hostname     = self.public_ip,
       user         = "ubuntu",
       identityfile = "~/.ssh/asakey"
